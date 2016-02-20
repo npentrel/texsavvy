@@ -63,6 +63,13 @@ def cv():
 def login():
     return linkedin.authorize(callback=url_for('authorized', _external=True))
 
+@app.route('/latex')
+def latex():
+    if 'linkedin_token' in session:
+        me = linkedin.get('people/~:(id,first-name,last-name,formatted-name,headline,email-address,picture-url,picture-urls::(original),public-profile-url,location,industry,summary,specialties,positions:(id,title,summary,start-date,end-date,is-current,company:(id,name,type,size,industry,ticker)),educations:(id,school-name,field-of-study,start-date,end-date,degree,activities,notes),associations,interests,num-recommenders,date-of-birth,publications:(id,title,publisher:(name),authors:(id,name),date,url,summary),patents:(id,title,summary,number,status:(id,name),office:(name),inventors:(id,name),date,url),languages:(id,language:(name),proficiency:(level,name)),skills:(id,skill:(name)),certifications:(id,name,authority:(name),number,start-date,end-date),courses:(id,name,number),recommendations-received:(id,recommendation-type,recommendation-text,recommender),honors-awards,three-current-positions,three-past-positions,volunteer)')
+        xelatex(me.data)
+        return "PDF created"
+    return redirect(url_for('login'))
 
 @app.route('/logout')
 def logout():
@@ -102,4 +109,3 @@ linkedin.pre_request = change_linkedin_query
 
 if __name__ == '__main__':
     app.run()
-    xelatex()

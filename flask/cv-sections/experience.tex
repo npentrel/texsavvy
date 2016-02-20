@@ -1,0 +1,38 @@
+%----------------------------------------------------------------------------------------
+%	SECTION TITLE
+%----------------------------------------------------------------------------------------
+
+\cvsection{Experience}
+
+%----------------------------------------------------------------------------------------
+%	SECTION CONTENT
+%----------------------------------------------------------------------------------------
+
+\begin{cventries}
+
+%------------------------------------------------
+
+\cventry
+{\DpositionOnetitle} % Job title
+{Google} % Organization
+{London, UK} % Location
+{\DpositionOneStartMonth. \DpositionOneStartYear  - Present} % Date(s)
+{ % Description(s) of tasks/responsibilities
+\DpositionOneSummary
+}
+
+%------------------------------------------------    
+
+\foreach \n/\m/\p/\q in \Dpositions {
+\cventry
+{\n} % Job title
+{Google} % Organization
+{London, UK} % Location
+{\p. \q  - Present} % Date(s)
+{ % Description(s) of tasks/responsibilities
+\m
+}
+%	Let's \n eat \m.\par \q
+}
+
+\end{cventries}
