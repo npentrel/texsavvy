@@ -3,7 +3,7 @@ from flask_oauthlib.client import OAuth
 from secrets import LINKEDIN_KEY, LINKEDIN_SECRET
 from runLatex import xelatex
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='')
 app.debug = True
 app.secret_key = 'development'
 oauth = OAuth(app)
@@ -13,7 +13,7 @@ linkedin = oauth.remote_app(
     consumer_key=LINKEDIN_KEY,
     consumer_secret=LINKEDIN_SECRET,
     request_token_params={
-        'scope': 'r_basicprofile',
+        'scope': 'r_emailaddress',
         'state': 'RandomString',
     },
     base_url='https://api.linkedin.com/v1/',
@@ -28,9 +28,31 @@ linkedin = oauth.remote_app(
 def index():
     if 'linkedin_token' in session:
         me = linkedin.get('people/~')
-        return jsonify(me.data)
+        # print (me.data) 
+        # me2 = linkedin.get('people/~/location')
+        # print (me2.data) 
+        # me3 = linkedin.get('people/~/formatted-name')
+        # print (me3.data) 
+        # me4 = linkedin.get('people/~/headline')
+        # print (me4.data) 
+        # me5 = linkedin.get('people/~/summary')
+        # print (me5.data) 
+        # me6 = linkedin.get('people/~/specialties')
+        # print (me6.data) 
+        # me7 = linkedin.get('people/~/positions')
+        # print (me7.data) 
+        # me8 = linkedin.get('people/~/picture-url')
+        # print (me8.data) 
+        # me9 = linkedin.get('people/~/public-profile-url')
+        print (me.data) 
+        # return jsonify(me.data)
+        return redirect(url_for('hello'))
     return redirect(url_for('login'))
 
+
+@app.route('/hello')
+def hello():
+	return app.send_static_file('hello.html')
 
 @app.route('/login')
 def login():
