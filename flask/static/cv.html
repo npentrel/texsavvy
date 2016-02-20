@@ -16,14 +16,14 @@
   <div class="wrapper">
     <div class="sidebar-wrapper">
       <div class="profile-container">
-        <img class="profile" src="assets/images/profile.png" alt="" />
+        <img class="profile" src="{{ pictureUrl }}" alt="" />
         <h1 class="name">{{ name }}</h1>
         <h3 class="tagline">{{ tagline }}</h3>
       </div><!--//profile-container-->
 
       <div class="contact-container container-block">
         <ul class="list-unstyled contact-list">
-          <li class="email"><i class="fa fa-envelope"></i><a href="mailto: {{ mail }}">{{ mail }}</a></li>
+          <li class="email"><i class="fa fa-envelope"></i><a href="mailto: {{ email }}">{{ email }}</a></li>
           <li class="phone"><i class="fa fa-phone"></i><a href="tel:{{ tel }}">{{ tel }}</a></li>
           <li class="website"><i class="fa fa-globe"></i><a href="{{ website }}" target="_blank">{{ website }}</a></li>
           <li class="linkedin"><i class="fa fa-linkedin"></i><a href="#" target="_blank">{{ linkedin }}</a></li>
@@ -67,27 +67,19 @@
 
     <div class="main-wrapper">
 
-      <section class="section summary-section">
-        <h2 class="section-title"><i class="fa fa-user"></i>Career Profile</h2>
-        <div class="summary">
-          <p>Summarise your career here lorem ipsum dolor sit amet, consectetuer adipiscing elit. You can <a href="http://themes.3rdwavemedia.com/website-templates/orbit-free-resume-cv-template-for-developers/" target="_blank">download this free resume/CV template here</a>. Aenean commodo ligula eget dolor aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu.</p>
-        </div><!--//summary-->
-      </section><!--//section-->
-
       <section class="section experiences-section">
         <h2 class="section-title"><i class="fa fa-briefcase"></i>Experiences</h2>
 
         <div class="item">
           <div class="meta">
             <div class="upper-row">
-              <h3 class="job-title">Lead Developer</h3>
+              <h3 class="job-title">{{ position1title }}</h3>
               <div class="time">2015 - Present</div>
             </div><!--//upper-row-->
             <div class="company">Startup Hubs, San Francisco</div>
           </div><!--//meta-->
           <div class="details">
-            <p>Describe your role here lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo.</p>
-            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. </p>
+            <p>{{ position1summary }}</p>
           </div><!--//details-->
         </div><!--//item-->
 

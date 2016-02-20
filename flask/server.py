@@ -2,6 +2,7 @@ from flask import Flask, redirect, url_for, session, request, jsonify
 from flask_oauthlib.client import OAuth
 from secrets import LINKEDIN_KEY, LINKEDIN_SECRET
 from runLatex import xelatex
+from template import render
 
 app = Flask(__name__, static_url_path='')
 app.debug = True
@@ -35,14 +36,15 @@ def index():
 
 def linkedin_info():
     if 'linkedin_token' in session:
-        me = linkedin.get('people/~:(id,first-name,last-name,headline,email-address,picture-url,industry,summary,specialties,positions:(id,title,summary,start-date,end-date,is-current,company:(id,name,type,size,industry,ticker)),educations:(id,school-name,field-of-study,start-date,end-date,degree,activities,notes),associations,interests,num-recommenders,date-of-birth,publications:(id,title,publisher:(name),authors:(id,name),date,url,summary),patents:(id,title,summary,number,status:(id,name),office:(name),inventors:(id,name),date,url),languages:(id,language:(name),proficiency:(level,name)),skills:(id,skill:(name)),certifications:(id,name,authority:(name),number,start-date,end-date),courses:(id,name,number),recommendations-received:(id,recommendation-type,recommendation-text,recommender),honors-awards,three-current-positions,three-past-positions,volunteer)')
+        me = linkedin.get('people/~:(id,first-name,last-name,formatted-name,headline,email-address,picture-url,public-profile-url,location,industry,summary,specialties,positions:(id,title,summary,start-date,end-date,is-current,company:(id,name,type,size,industry,ticker)),educations:(id,school-name,field-of-study,start-date,end-date,degree,activities,notes),associations,interests,num-recommenders,date-of-birth,publications:(id,title,publisher:(name),authors:(id,name),date,url,summary),patents:(id,title,summary,number,status:(id,name),office:(name),inventors:(id,name),date,url),languages:(id,language:(name),proficiency:(level,name)),skills:(id,skill:(name)),certifications:(id,name,authority:(name),number,start-date,end-date),courses:(id,name,number),recommendations-received:(id,recommendation-type,recommendation-text,recommender),honors-awards,three-current-positions,three-past-positions,volunteer)')
         print (me.data) 
-        return redirect(url_for('hello'))
+        return render(me.data)
     return redirect(url_for('login'))
 
-@app.route('/hello')
-def hello():
-	return redirect(url_for('static', filename='hello.html'))
+@app.route('/cv')
+def cv():
+	return linkedin_info()
+	# return redirect(url_for('static', filename='cv.html'))
 
 @app.route('/login')
 def login():
