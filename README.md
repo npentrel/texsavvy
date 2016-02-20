@@ -11,8 +11,8 @@ python server.py
 
 
 # TODO
-* Form to verify data
-* latexify
+* latexify - Naomi
+* Form to verify data - Rashiq
 * select template
 * safe to dropbox
 * tips

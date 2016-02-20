@@ -11,7 +11,7 @@ def render(data):
         name=data['formattedName'],
         tagline=data['headline'],
         email=data['emailAddress'],
-        pictureUrl=data['pictureUrl'],
+        pictureUrl=data['pictureUrls']['values'][0],
         linkedin=data['publicProfileUrl'],
         position1title=data['positions']['values'][0]['title'],
         position1summary=data['positions']['values'][0]['summary'],
