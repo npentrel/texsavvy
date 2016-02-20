@@ -23,6 +23,8 @@ linkedin = oauth.remote_app(
     authorize_url='https://www.linkedin.com/uas/oauth2/authorization',
 )
 
+def root_dir():  # pragma: no cover
+    return os.path.abspath(os.path.dirname(__file__))
 
 @app.route('/')
 def index():
@@ -52,7 +54,7 @@ def index():
 
 @app.route('/hello')
 def hello():
-	return app.send_static_file('hello.html')
+	return redirect(url_for('static', filename='hello.html'))
 
 @app.route('/login')
 def login():
