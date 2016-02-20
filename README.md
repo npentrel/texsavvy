@@ -8,3 +8,12 @@ pip install flask
 
 # Run server
 python server.py
+
+
+# TODO
+. Form to verify data
+. latexify
+. select template
+. safe to dropbox
+. tips
+. america/europe

@@ -14,9 +14,9 @@ def render(data):
         pictureUrl=data['pictureUrl'],
         linkedin=data['publicProfileUrl'],
         position1title=data['positions']['values'][0]['title'],
-        # position1summary=data['positions']['values'][0]['summary'],
-        # position1startMonth= data['positions']['values'][0]['startDate']['month'],
-        # position1startYear= data['positions']['values'][0]['startDate']['year']
+        position1summary=data['positions']['values'][0]['summary'],
+        position1startMonth= data['positions']['values'][0]['startDate']['month'],
+        position1startYear= data['positions']['values'][0]['startDate']['year']
     )
 
     return template
