@@ -1,13 +1,16 @@
-from flask import Flask, redirect, url_for, session, request, jsonify
+from flask import Flask, redirect, url_for, session, request, jsonify, render_template
 from flask_oauthlib.client import OAuth
 from secrets import LINKEDIN_KEY, LINKEDIN_SECRET
 from runLatex import xelatex
 from template import render
+import json
 
-app = Flask(__name__, static_url_path='')
+app = Flask(__name__, static_url_path='', template_folder='static')
 app.debug = True
 app.secret_key = 'development'
 oauth = OAuth(app)
+# current_dir = os.path.dirname(os.path.abspath(__file__))
+# jinjja = Environment(loader=FileSystemLoader(current_dir), trim_blocks=True)
 
 linkedin = oauth.remote_app(
     'linkedin',
@@ -36,8 +39,16 @@ def index():
 def linkedin_info():
     if 'linkedin_token' in session:
         me = linkedin.get('people/~:(id,first-name,last-name,formatted-name,headline,email-address,picture-url,picture-urls::(original),public-profile-url,location,industry,summary,specialties,positions:(id,title,summary,start-date,end-date,is-current,company:(id,name,type,size,industry,ticker)),educations:(id,school-name,field-of-study,start-date,end-date,degree,activities,notes),associations,interests,num-recommenders,date-of-birth,publications:(id,title,publisher:(name),authors:(id,name),date,url,summary),patents:(id,title,summary,number,status:(id,name),office:(name),inventors:(id,name),date,url),languages:(id,language:(name),proficiency:(level,name)),skills:(id,skill:(name)),certifications:(id,name,authority:(name),number,start-date,end-date),courses:(id,name,number),recommendations-received:(id,recommendation-type,recommendation-text,recommender),honors-awards,three-current-positions,three-past-positions,volunteer)')
-        print (me.data) 
-        return render(me.data)
+        print json.dumps(me.data)
+        return render_template('cv.html',
+        name=me.data['formattedName'],
+        tagline=me.data['headline'],
+        email=me.data['emailAddress'],
+        pictureUrl=me.data['pictureUrls']['values'][0],
+        linkedin=me.data['publicProfileUrl'],
+        jobs=me.data['positions']['values']
+    )
+
     return redirect(url_for('login'))
 
 @app.route('/cv')
