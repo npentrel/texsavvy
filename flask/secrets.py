@@ -1,0 +1,3 @@
+
+LINKEDIN_KEY = "77yg7tj71p4lag"
+LINKEDIN_SECRET = "zt7GeN6IHkOBxvRj"

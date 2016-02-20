@@ -1,5 +1,6 @@
 from subprocess import call
 
 def xelatex():
-	call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "/Users/Naomi/coding/texsavvy/flask/templates/resume_cv.tex"])
-
+	call("cd templatex/cv_14")
+	call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "resume_cv.tex"])
+	print "done"
