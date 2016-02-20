@@ -121,6 +121,12 @@ header .scrolldown a:hover { color: #11ABB0; }
 
 /* primary navigation
 --------------------------------------------------------------------- */
+
+#loginButton {
+   margin: 0 auto;
+   text-align: center;
+}
+
 #nav-wrap ul, #nav-wrap li, #nav-wrap a {
 	 margin: 0;
 	 padding: 0;

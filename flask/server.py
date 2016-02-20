@@ -74,7 +74,7 @@ def latex():
 @app.route('/logout')
 def logout():
     session.pop('linkedin_token', None)
-    return redirect(url_for('index'))
+    return redirect(url_for('login'))
 
 
 @app.route('/login/authorized')
