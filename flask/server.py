@@ -30,8 +30,7 @@ def root_dir():  # pragma: no cover
 @app.route('/')
 def index():
     if 'linkedin_token' in session:
-    	linkedin_info()
-        return redirect(url_for('hello'))
+        return redirect(url_for('cv'))
     return redirect(url_for('login'))
 
 def linkedin_info():
