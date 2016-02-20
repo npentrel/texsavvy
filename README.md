@@ -17,3 +17,7 @@ python server.py
 * safe to dropbox
 * tips
 * america/europe
+
+Dummy account:
+jenny.brown@outlook.de & barcelona+12# texsavvy
+Project that generates latex CVs. 
