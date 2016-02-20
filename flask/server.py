@@ -29,28 +29,16 @@ def root_dir():  # pragma: no cover
 @app.route('/')
 def index():
     if 'linkedin_token' in session:
-        me = linkedin.get('people/~')
-        # print (me.data) 
-        # me2 = linkedin.get('people/~/location')
-        # print (me2.data) 
-        # me3 = linkedin.get('people/~/formatted-name')
-        # print (me3.data) 
-        # me4 = linkedin.get('people/~/headline')
-        # print (me4.data) 
-        # me5 = linkedin.get('people/~/summary')
-        # print (me5.data) 
-        # me6 = linkedin.get('people/~/specialties')
-        # print (me6.data) 
-        # me7 = linkedin.get('people/~/positions')
-        # print (me7.data) 
-        # me8 = linkedin.get('people/~/picture-url')
-        # print (me8.data) 
-        # me9 = linkedin.get('people/~/public-profile-url')
-        print (me.data) 
-        # return jsonify(me.data)
+    	linkedin_info()
         return redirect(url_for('hello'))
     return redirect(url_for('login'))
 
+def linkedin_info():
+    if 'linkedin_token' in session:
+        me = linkedin.get('people/~:(id,first-name,last-name,headline,picture-url,industry,summary,specialties,positions:(id,title,summary,start-date,end-date,is-current,company:(id,name,type,size,industry,ticker)),educations:(id,school-name,field-of-study,start-date,end-date,degree,activities,notes),associations,interests,num-recommenders,date-of-birth,publications:(id,title,publisher:(name),authors:(id,name),date,url,summary),patents:(id,title,summary,number,status:(id,name),office:(name),inventors:(id,name),date,url),languages:(id,language:(name),proficiency:(level,name)),skills:(id,skill:(name)),certifications:(id,name,authority:(name),number,start-date,end-date),courses:(id,name,number),recommendations-received:(id,recommendation-type,recommendation-text,recommender),honors-awards,three-current-positions,three-past-positions,volunteer)')
+        print (me.data) 
+        return redirect(url_for('hello'))
+    return redirect(url_for('login'))
 
 @app.route('/hello')
 def hello():
@@ -76,9 +64,7 @@ def authorized():
             request.args['error_description']
         )
     session['linkedin_token'] = (resp['access_token'], '')
-    me = linkedin.get('people/~')
-    return jsonify(me.data)
-
+    return linkedin_info()
 
 @linkedin.tokengetter
 def get_linkedin_oauth_token():
