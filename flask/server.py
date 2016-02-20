@@ -76,5 +76,5 @@ linkedin.pre_request = change_linkedin_query
 
 
 if __name__ == '__main__':
+    # xelatex()
     app.run()
-    xelatex()
