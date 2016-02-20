@@ -65,7 +65,7 @@ def authorized():
             request.args['error_description']
         )
     session['linkedin_token'] = (resp['access_token'], '')
-    return linkedin_info()
+    return redirect(url_for('cv'))
 
 @linkedin.tokengetter
 def get_linkedin_oauth_token():
