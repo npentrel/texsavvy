@@ -1,4 +1,5 @@
 from subprocess import call
+from iso3166 import countries
 
 def personalinfoFile(data):
     target = open('personalinfo.tex', 'w')
@@ -16,7 +17,7 @@ def personalinfoFile(data):
     dict['DfirstName'] = data['firstName'] 
     dict['DlastName'] = data['lastName']
     dict['Dcity'] = data['location']['name']
-    dict['Dcountry'] = data['location']['country']['code']
+    dict['Dcountry'] = countries.get(data['location']['country']['code'])[0]
     pos = ""
     for v in data['positions']['values']:
     	pos += v['title'] + "/" + v['summary'] + "/" + v['company']['name'] + "/" + str(v['startDate']['month']) + "/" + str(v['startDate']['year']) + ","
@@ -36,8 +37,8 @@ def personalinfoFile(data):
 
 def xelatex(data):
     personalinfoFile(data)
-    call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "benicv.tex"])
-    call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "benicv.tex"])
+    # call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "benicv.tex"])
+    # call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "benicv.tex"])
 
     # call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "texsavvy_2.tex"])
     # call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "texsavvy_2.tex"])
@@ -45,7 +46,7 @@ def xelatex(data):
     # call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "resume_cv.tex"])
     # call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "resume_cv.tex"])
 
-    # call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "texsavvy_EU.tex"])
-    # call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "texsavvy_EU.tex"])
+    call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "texsavvy_EU.tex"])
+    call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "texsavvy_EU.tex"])
     print "done"
     return 'OK'
