@@ -22,6 +22,7 @@
 \documentclass[10pt]{article} % Default font size
 
 \input{structure.tex} % Include the file specifying document layout
+\input{personalinfo.tex}
 
 %----------------------------------------------------------------------------------------
 
@@ -31,8 +32,7 @@
 %	NAME AND CONTACT INFORMATION
 %----------------------------------------------------------------------------------------
 
-\title{\DfirstName}{\DlastName} % Print the main header
-
+\title{\DfirstName\ \DlastName} % Print the main header
 %------------------------------------------------
 
 \parbox{0.5\textwidth}{ % First block
@@ -47,17 +47,9 @@
 \parbox{0.5\textwidth}{ % Second block
 \begin{tabbing} % Enables tabbing
 \hspace{3cm} \= \hspace{4cm} \= \kill % Spacing within the block
-{\bf Home Phone} \> +0 (000) 111 1111 \\ % Home phone
-{\bf Mobile Phone} \> +0 (000) 111 1112 \\ % Mobile phone
+%\linkedin{\Dlinkedin}
 {\bf Email} \> \href{mailto:\Dmail}{\Dmail} \\ % Email address
 \end{tabbing}}
-
-%----------------------------------------------------------------------------------------
-%	PERSONAL PROFILE
-%----------------------------------------------------------------------------------------
-
-\section{Personal Profile}
-
 
 
 %----------------------------------------------------------------------------------------
@@ -90,7 +82,7 @@
 
 \section{Employment History}
 
-\job
+\job 
 {Sep 2011 -}{Present}
 {Lehman Brothers, 1234 Mario Park, San Francisco, CA, United States}
 {http://www.lehmanbrothers.com}
@@ -98,21 +90,7 @@
 {Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis elementum nec dolor sed sagittis. Cras justo lorem, volutpat mattis lacus vel, consequat aliquam quam. Interdum et malesuada fames ac ante ipsum primis in faucibus.\\
 \rule{0mm}{5mm}\textbf{Technologies:} Ruby on Rails 2.3, Amazon EC2, NoSQL data stores, memcached, collaborative matching, Facebook Graph API.}
 
-%------------------------------------------------
 
-\job
-{Oct 2009 -}{Sep 2010}
-{Initech Inc., Otis St, CA 94025, United States}
-{http://www.initech.com}
-{Analyst}
-{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis elementum nec dolor:
-
-\begin{itemize-noindent}
-\item{Developed spreadsheets for risk analysis on exotic derivatives on a wide array of commodities (ags, oils, precious and base metals.)}
-\item{Managed blotter and secondary trades on structured notes, liaised with Middle Office, Sales and Structuring for bookkeeping.}
-\end{itemize-noindent}
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis elementum nec dolor sed sagittis.}
 
 %----------------------------------------------------------------------------------------
 %	IT/COMPUTING SKILLS SECTION
