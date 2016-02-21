@@ -44,10 +44,10 @@
   <internal package="biblatex" priority="9" active="1">
     <generic>latex</generic>
     <provides type="dynamic">
-      <file>cv_10.bcf</file>
+      <file>benicv.bcf</file>
     </provides>
     <requires type="dynamic">
-      <file>cv_10.bbl</file>
+      <file>benicv.bbl</file>
     </requires>
     <requires type="static">
       <file>blx-dm.def</file>
@@ -65,19 +65,19 @@
     <generic>biber</generic>
     <cmdline>
       <binary>biber</binary>
-      <infile>cv_10</infile>
+      <infile>benicv</infile>
     </cmdline>
     <input>
-      <file>cv_10.bcf</file>
+      <file>benicv.bcf</file>
     </input>
     <output>
-      <file>cv_10.bbl</file>
+      <file>benicv.bbl</file>
     </output>
     <provides type="dynamic">
-      <file>cv_10.bbl</file>
+      <file>benicv.bbl</file>
     </provides>
     <requires type="dynamic">
-      <file>cv_10.bcf</file>
+      <file>benicv.bcf</file>
     </requires>
     <requires type="editable">
       <file>bibliography.bib</file>

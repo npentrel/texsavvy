@@ -8,3 +8,5 @@ lib/
 pip-selfcheck.json
 *.pdf
 *.log
+*.aux
+*.out

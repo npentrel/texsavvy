@@ -16,10 +16,10 @@ def personalinfoFile(data):
     dict['DlastName'] = data['lastName']
     dict['Dcity'] = data['location']['name']
     dict['Dcountry'] = data['location']['country']['code']
-    pos = "{"
+    pos = ""
     for v in data['positions']['values']:
     	pos += v['title'] + "/" + v['summary'] + "/" + str(v['startDate']['month']) + "/" + str(v['startDate']['year']) + ","
-	dict['Dpositions'] = pos[:(len(pos)-1)] + "}"
+	dict['Dpositions'] = pos[:(len(pos)-1)]
 
     for d in dict:
         target.write("\\newcommand{\\")
@@ -35,7 +35,8 @@ def personalinfoFile(data):
 
 def xelatex(data):
     personalinfoFile(data)
-    call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "texsavvy_2.tex"])
-    # call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "resume_cv.tex"])
+    # call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "benicv.tex"])
+    # call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "texsavvy_2.tex"])
+    call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "resume_cv.tex"])
     print "done"
     return 'OK'

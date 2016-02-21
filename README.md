@@ -13,7 +13,7 @@ python server.py
 # TODO
 * Form to verify data - Rashiq
 * select template
-* safe to dropbox
+* safe to onedrive
 * tips
 * america/europe
 
