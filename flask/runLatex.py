@@ -40,8 +40,8 @@ def personalinfoFile(data):
 
 def xelatex(data):
     personalinfoFile(data)
-    # call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "benicv.tex"])
-    # call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "benicv.tex"])
+    call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "benicv.tex"])
+    call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "benicv.tex"])
 
     # call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "texsavvy_2.tex"])
     # call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "texsavvy_2.tex"])
@@ -49,7 +49,7 @@ def xelatex(data):
     # call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "resume_cv.tex"])
     # call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "resume_cv.tex"])
 
-    call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "texsavvy_EU.tex"])
-    call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "texsavvy_EU.tex"])
+    # call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "texsavvy_EU.tex"])
+    # call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "texsavvy_EU.tex"])
     print "done"
     return 'OK'
