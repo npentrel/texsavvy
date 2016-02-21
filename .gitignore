@@ -10,3 +10,4 @@ pip-selfcheck.json
 *.log
 *.aux
 *.out
+flask/data.json

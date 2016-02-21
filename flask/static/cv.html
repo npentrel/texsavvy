@@ -24,19 +24,19 @@
       <div class="contact-container container-block">
         <ul class="list-unstyled contact-list">
           <li class="email"><i class="fa fa-envelope"></i><a href="mailto: {{ email }}">{{ email }}</a></li>
-          <li class="phone"><i class="fa fa-phone"></i><a href="tel:{{ tel }}">{{ tel }}</a></li>
-          <li class="website"><i class="fa fa-globe"></i><a href="{{ website }}" target="_blank">{{ website }}</a></li>
-          <li class="linkedin"><i class="fa fa-linkedin"></i><a href="#" target="_blank">{{ linkedin }}</a></li>
-          <li class="github"><i class="fa fa-github"></i><a href="#" target="_blank">{{ github }}</a></li>
-          <li class="twitter"><i class="fa fa-twitter"></i><a href="{{ twitter }}" target="_blank">{{ twitter }}</a></li>
+          <!-- <li class="phone"><i class="fa fa-phone"></i><a href="tel:{{ tel }}">{{ tel }}</a></li> -->
+          <li class="website"><i class="fa fa-globe"></i><a href="{{ website }}" target="_blank">{{ form_data['website'] }}</a></li>
+          <li class="linkedin"><i class="fa fa-linkedin"></i><a href="{{ linkedin }}" target="_blank">{{ linkedin_format(linkedin) }}</a></li>
+          <li class="github"><i class="fa fa-github"></i><a href="{{ form_data['github'] }}" target="_blank">{{ form_data['github'] }}</a></li>
+          <li class="twitter"><i class="fa fa-twitter"></i><a href="{{ form_data['twitter'] }}" target="_blank">{{ form_data['twitter'] }}</a></li>
         </ul>
       </div><!--//contact-container-->
       <div class="education-container container-block">
         <h2 class="container-block-title">Education</h2>
         <div class="item">
           <h4 class="degree">MSc in Computer Science</h4>
-          <h5 class="meta">University of London</h5>
-          <div class="time">2011 - 2012</div>
+          <h5 class="meta">{{ form_data['university'] }}</h5>
+          <div class="time">{{ form_data['uni_begin_date'] }} - {{ form_data['uni_end_date'] }}</div>
         </div><!--//item-->
         <div class="item">
           <h4 class="degree">BSc in Applied Mathematics</h4>
@@ -69,17 +69,17 @@
 
       <section class="section experiences-section">
         <h2 class="section-title"><i class="fa fa-briefcase"></i>Experiences</h2>
-        {% for job in jobs %}
+        {% for job in form_data['jobs'] %}
         <div class="item">
           <div class="meta">
             <div class="upper-row">
-              <h3 class="job-title">{{ job['title']}}</h3>
-              <div class="time">{{ '%02d' | format(job['startDate']['month'] )}} / {{ job['startDate']['year']}} - {{ job['startDate']['year'] + 2}}</div>
+              <h3 class="job-title">{{ job['job_title']}}</h3>
+              <div class="time">{{ job['job_begin_data'] }} - {{ job['job_end_data'] }}</div>
             </div><!--//upper-row-->
-            <div class="company">{{ job['company']['name'] }}</div>
+            <div class="company">{{ job['workplace'] }}</div>
           </div><!--//meta-->
           <div class="details">
-            <p>{{ job['summary'] }}</p>
+            <p>{{ job['job_summary'] }}</p>
           </div><!--//details-->
         </div><!--//item-->
         {% endfor %}

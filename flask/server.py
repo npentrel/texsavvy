@@ -5,11 +5,13 @@ from runLatex import xelatex
 from template import render
 import json
 from utils import linkedin_format
+from collections import defaultdict
 
 app = Flask(__name__, static_url_path='', template_folder='static')
 app.debug = True
 app.secret_key = 'development'
 oauth = OAuth(app)
+
 # current_dir = os.path.dirname(os.path.abspath(__file__))
 # jinjja = Environment(loader=FileSystemLoader(current_dir), trim_blocks=True)
 
@@ -28,6 +30,10 @@ linkedin = oauth.remote_app(
     authorize_url='https://www.linkedin.com/uas/oauth2/authorization',
 )
 
+# add global jinja helper functions 
+app.jinja_env.globals.update(linkedin_format=linkedin_format)
+
+
 def root_dir():  # pragma: no cover
     return os.path.abspath(os.path.dirname(__file__))
 
@@ -35,11 +41,9 @@ def root_dir():  # pragma: no cover
 def index():
     return redirect(url_for('static', filename='index.html'))
 
-def linkedin_info():
+def linkedin_info(form_data):
     if 'linkedin_token' in session:
         me = linkedin_data()
-        
-        print json.dumps(me.data)
 
         template = render_template('cv.html',
             name=me.data['formattedName'],
@@ -47,7 +51,7 @@ def linkedin_info():
             email=me.data['emailAddress'],
             pictureUrl=me.data['pictureUrls']['values'][0],
             linkedin=me.data['publicProfileUrl'],
-            jobs=me.data['positions']['values']
+            form_data=form_data
         )
         return template
 
@@ -55,7 +59,9 @@ def linkedin_info():
 
 @app.route('/cv')
 def cv():
-	return linkedin_info()
+    with open('data.json', 'r') as f:
+        file = json.loads(f.read())
+	return linkedin_info(file)
 
 @app.route('/edit')
 def edit():
@@ -66,6 +72,24 @@ def edit():
         )
         return template
     return redirect(url_for('login'))
+
+@app.route('/form', methods=['POST'])
+def form():
+    form_data = {}
+    jobs = defaultdict(dict)
+    for i in request.form:
+        if i[-1].isdigit():
+            jobs[int(i[-1])][i[:-1]] = request.form[i]
+        else:
+            form_data[i] = request.form[i]
+
+    # convert back to lists
+    jobs = [jobs[job] for job in jobs]
+    form_data['jobs'] = jobs
+
+    with open('data.json', 'w') as f:
+        json.dump(form_data, f)
+    return redirect(url_for('cv'))
 
 @app.route('/login')
 def login():
@@ -94,7 +118,7 @@ def authorized():
             request.args['error_description']
         )
     session['linkedin_token'] = (resp['access_token'], '')
-    return redirect(url_for('cv'))
+    return redirect(url_for('edit'))
 
 @linkedin.tokengetter
 def get_linkedin_oauth_token():
