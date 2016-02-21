@@ -1,5 +1,6 @@
 from subprocess import call
 from iso3166 import countries
+import urllib
 
 def personalinfoFile(data):
     target = open('personalinfo.tex', 'w')
@@ -8,6 +9,8 @@ def personalinfoFile(data):
     dict['Dtagline'] = data['headline']
     dict['Dmail'] = data['emailAddress']
     dict['DpictureUrl'] = data['pictureUrls']['values'][0]
+    urllib.urlretrieve(dict['DpictureUrl'], "image.jpg")
+    
     dict['Dlinkedin'] = data['publicProfileUrl']
     dict['DpositionOnetitle'] = data['positions']['values'][0]['title']
     dict['DpositionOneSummary'] = data['positions']['values'][0]['summary']
