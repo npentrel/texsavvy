@@ -32,9 +32,7 @@ def root_dir():  # pragma: no cover
 
 @app.route('/')
 def index():
-    if 'linkedin_token' in session:
-        return redirect(url_for('cv'))
-    return redirect(url_for('login'))
+    return redirect(url_for('static', filename='index.html'))
 
 def linkedin_info():
     if 'linkedin_token' in session:
@@ -74,7 +72,7 @@ def latex():
 @app.route('/logout')
 def logout():
     session.pop('linkedin_token', None)
-    return redirect(url_for('login'))
+    return redirect(url_for('index'))
 
 
 @app.route('/login/authorized')
