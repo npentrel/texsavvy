@@ -18,6 +18,7 @@
 %----------------------------------------------------------------------------------------
 %	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
 %----------------------------------------------------------------------------------------
+\RequirePackage{pgffor}
 
 \documentclass[10pt]{article} % Default font size
 
@@ -82,13 +83,14 @@
 
 \section{Employment History}
 
-\job 
-{Sep 2011 -}{Present}
-{Lehman Brothers, 1234 Mario Park, San Francisco, CA, United States}
-{http://www.lehmanbrothers.com}
-{Senior Developer / Technical Team Lead}
-{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis elementum nec dolor sed sagittis. Cras justo lorem, volutpat mattis lacus vel, consequat aliquam quam. Interdum et malesuada fames ac ante ipsum primis in faucibus.\\
-\rule{0mm}{5mm}\textbf{Technologies:} Ruby on Rails 2.3, Amazon EC2, NoSQL data stores, memcached, collaborative matching, Facebook Graph API.}
+\foreach \title/\summary/\mon/\yea in \Dpositions {
+	\job
+	{\mon-\yea - Present}
+	{Lehman Brothers, 1234 Mario Park, San Francisco, CA, United States}\newline
+	{www.lehmanbrothers.com}\newline
+	{\title} % Job title
+	{\summary}
+}
 
 
 
