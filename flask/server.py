@@ -4,6 +4,7 @@ from secrets import LINKEDIN_KEY, LINKEDIN_SECRET
 from runLatex import xelatex
 from template import render
 import json
+from utils import linkedin_format
 
 app = Flask(__name__, static_url_path='', template_folder='static')
 app.debug = True
@@ -36,7 +37,7 @@ def index():
 
 def linkedin_info():
     if 'linkedin_token' in session:
-        me = linkedin.get('people/~:(id,first-name,last-name,formatted-name,headline,email-address,picture-url,picture-urls::(original),public-profile-url,location,industry,summary,specialties,positions:(id,title,summary,start-date,end-date,is-current,company:(id,name,type,size,industry,ticker)),educations:(id,school-name,field-of-study,start-date,end-date,degree,activities,notes),associations,interests,num-recommenders,date-of-birth,publications:(id,title,publisher:(name),authors:(id,name),date,url,summary),patents:(id,title,summary,number,status:(id,name),office:(name),inventors:(id,name),date,url),languages:(id,language:(name),proficiency:(level,name)),skills:(id,skill:(name)),certifications:(id,name,authority:(name),number,start-date,end-date),courses:(id,name,number),recommendations-received:(id,recommendation-type,recommendation-text,recommender),honors-awards,three-current-positions,three-past-positions,volunteer)')
+        me = linkedin_data()
         
         print json.dumps(me.data)
 
@@ -55,7 +56,16 @@ def linkedin_info():
 @app.route('/cv')
 def cv():
 	return linkedin_info()
-	# return redirect(url_for('static', filename='cv.html'))
+
+@app.route('/edit')
+def edit():
+    if 'linkedin_token' in session:
+        me = linkedin_data()
+        template = render_template('edit.html',
+            jobs=me.data['positions']['values']
+        )
+        return template
+    return redirect(url_for('login'))
 
 @app.route('/login')
 def login():
@@ -90,6 +100,8 @@ def authorized():
 def get_linkedin_oauth_token():
     return session.get('linkedin_token')
 
+def linkedin_data():
+    return linkedin.get('people/~:(id,first-name,last-name,formatted-name,headline,email-address,picture-url,picture-urls::(original),public-profile-url,location,industry,summary,specialties,positions:(id,title,summary,start-date,end-date,is-current,company:(id,name,type,size,industry,ticker)),educations:(id,school-name,field-of-study,start-date,end-date,degree,activities,notes),associations,interests,num-recommenders,date-of-birth,publications:(id,title,publisher:(name),authors:(id,name),date,url,summary),patents:(id,title,summary,number,status:(id,name),office:(name),inventors:(id,name),date,url),languages:(id,language:(name),proficiency:(level,name)),skills:(id,skill:(name)),certifications:(id,name,authority:(name),number,start-date,end-date),courses:(id,name,number),recommendations-received:(id,recommendation-type,recommendation-text,recommender),honors-awards,three-current-positions,three-past-positions,volunteer)')
 
 def change_linkedin_query(uri, headers, body):
     auth = headers.pop('Authorization')
