@@ -1,0 +1,192 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Wilson Resume/CV
+% XeLaTeX Template
+% Version 1.0 (22/1/2015)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Howard Wilson (https://github.com/watsonbox/cv_template_2004) with
+% extensive modifications by Vel (vel@latextemplates.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[10pt]{article} % Default font size
+
+\input{structure.tex} % Include the file specifying document layout
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+%----------------------------------------------------------------------------------------
+%	NAME AND CONTACT INFORMATION
+%----------------------------------------------------------------------------------------
+
+\title{\DfirstName}{\DlastName} % Print the main header
+
+%------------------------------------------------
+
+\parbox{0.5\textwidth}{ % First block
+\begin{tabbing} % Enables tabbing
+\hspace{3cm} \= \hspace{4cm} \= \kill % Spacing within the block
+{\bf Address} \> 123 Broadway,\\ % Address line 1
+\> City, 12345 \\ % Address line 2
+{\bf Date of Birth} \> 7$^{th}$ September 1979 \\ % Date of birth 
+{\bf Nationality} \> British % Nationality
+\end{tabbing}}
+\hfill % Horizontal space between the two blocks
+\parbox{0.5\textwidth}{ % Second block
+\begin{tabbing} % Enables tabbing
+\hspace{3cm} \= \hspace{4cm} \= \kill % Spacing within the block
+{\bf Home Phone} \> +0 (000) 111 1111 \\ % Home phone
+{\bf Mobile Phone} \> +0 (000) 111 1112 \\ % Mobile phone
+{\bf Email} \> \href{mailto:\Dmail}{\Dmail} \\ % Email address
+\end{tabbing}}
+
+%----------------------------------------------------------------------------------------
+%	PERSONAL PROFILE
+%----------------------------------------------------------------------------------------
+
+\section{Personal Profile}
+
+
+
+%----------------------------------------------------------------------------------------
+%	EDUCATION SECTION
+%----------------------------------------------------------------------------------------
+
+\section{Education}
+
+\tabbedblock{
+\bf{2004-2007} \> BSc Hons in Computer Science - \href{http://www.universityofcalifornia.edu}{The University of California, Berkeley} \\[5pt]
+\>First Class - 80\% Average\\
+\>\+
+\textit{Third Year Project - 89\% awarded `Project of the Year 2007'}
+}
+
+%------------------------------------------------
+
+\tabbedblock{
+\bf{2001-2003} \> Advanced Secondary Education - \href{http://www.berkeleycollege.edu}{Berkeley College, California}\\[5pt]
+\>\+
+\textit{Pure Mathematics} \> A \\
+\textit{Statistics (AS)} \> A \\
+\textit{Physics} \> A \\
+\textit{Economics} \> B
+}
+
+%----------------------------------------------------------------------------------------
+%	EMPLOYMENT HISTORY SECTION
+%----------------------------------------------------------------------------------------
+
+\section{Employment History}
+
+\job
+{Sep 2011 -}{Present}
+{Lehman Brothers, 1234 Mario Park, San Francisco, CA, United States}
+{http://www.lehmanbrothers.com}
+{Senior Developer / Technical Team Lead}
+{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis elementum nec dolor sed sagittis. Cras justo lorem, volutpat mattis lacus vel, consequat aliquam quam. Interdum et malesuada fames ac ante ipsum primis in faucibus.\\
+\rule{0mm}{5mm}\textbf{Technologies:} Ruby on Rails 2.3, Amazon EC2, NoSQL data stores, memcached, collaborative matching, Facebook Graph API.}
+
+%------------------------------------------------
+
+\job
+{Oct 2009 -}{Sep 2010}
+{Initech Inc., Otis St, CA 94025, United States}
+{http://www.initech.com}
+{Analyst}
+{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis elementum nec dolor:
+
+\begin{itemize-noindent}
+\item{Developed spreadsheets for risk analysis on exotic derivatives on a wide array of commodities (ags, oils, precious and base metals.)}
+\item{Managed blotter and secondary trades on structured notes, liaised with Middle Office, Sales and Structuring for bookkeeping.}
+\end{itemize-noindent}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis elementum nec dolor sed sagittis.}
+
+%----------------------------------------------------------------------------------------
+%	IT/COMPUTING SKILLS SECTION
+%----------------------------------------------------------------------------------------
+
+\section{Software Engineering Skills}
+
+\skillgroup{Programming Languages}
+{
+\textit{Ruby} - MRI 1.8.7, 1.9.2\\
+\textit{ASP.NET, C\#, VB.NET}\\
+\textit{PHP}\\
+\textit{Java/Scala}
+}
+
+%------------------------------------------------
+
+\skillgroup{Web Development}
+{
+\textit{HTML5, CSS3/SASS, JavaScript/CoffeeScript/jQuery}\\
+\textit{Ruby on Rails v3.1}\\
+\textit{Test:Unit, RSpec, Cucumber, Selenium} - automated testing frameworks\\
+\textit{Apache/Nginx Web Servers}\\
+}
+
+%------------------------------------------------
+
+\skillgroup{Miscellaneous}
+{
+\textit{Microsoft SQL Server 2000/2005} - database architecture and administration\\
+\textit{Transact-SQL} - data definition and manipulation\\
+\textit{SQL Profiler} - performance tuning and debugging\\
+\textit{MySQL Server}\\
+\textit{CVS, DARCS, git} - source version control
+}
+
+%----------------------------------------------------------------------------------------
+%	INTERESTS SECTION
+%----------------------------------------------------------------------------------------
+
+\section{Interests}
+
+\interestsgroup{
+\interest{Badminton, Tennis, Running, Cycling, Sailing}
+\interest{Travelling}
+\interest{Creative Writing}
+\interest{Photography}
+\interest{Car Mechanics}
+}
+
+%----------------------------------------------------------------------------------------
+%	REFEREE SECTION
+%----------------------------------------------------------------------------------------
+
+\section{Referees}
+
+\parbox{0.5\textwidth}{ % First block
+\begin{tabbing}
+\hspace{2.75cm} \= \hspace{4cm} \= \kill % Spacing within the block
+{\bf Name} \> Bill Lumbergh \\ % Referee name
+{\bf Company} \> Initech Inc. \\ % Referee company
+{\bf Position} \> Vice President \\ % Referee job title 
+{\bf Contact} \> \href{mailto:bill@initech.com}{bill@initech.com} % Referee contact information
+\end{tabbing}}
+\hfill % Horizontal space between the two blocks
+\parbox{0.5\textwidth}{ % Second block
+\begin{tabbing}
+\hspace{2.75cm} \= \hspace{4cm} \= \kill % Spacing within the block
+{\bf Name} \> Michael "Big Mike" Tucker\\ % Referee name
+{\bf Company} \> Burbank Buy More \\ % Referee company
+{\bf Position} \> Store Manager \\ % Referee job title 
+{\bf Contact} \> \href{mailto:mike@buymore.com}{mike@buymore.com} % Referee contact information
+\end{tabbing}}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}
