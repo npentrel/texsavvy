@@ -39,8 +39,8 @@
 \parbox{0.5\textwidth}{ % First block
 \begin{tabbing} % Enables tabbing
 \hspace{3cm} \= \hspace{4cm} \= \kill % Spacing within the block
-{\bf Address} \> 123 Broadway,\\ % Address line 1
-\> \Dcity , 12345 \\ % Address line 2
+{\bf Address} \\ % Address line 1
+\> \Dcity , \Dcountry \\ % Address line 2
 {\bf Date of Birth} \> 7$^{th}$ September 1979 \\ % Date of birth 
 {\bf Nationality} \> British % Nationality
 \end{tabbing}}
@@ -66,16 +66,6 @@
 \textit{Third Year Project - 89\% awarded `Project of the Year 2007'}
 }
 
-%------------------------------------------------
-
-\tabbedblock{
-\bf{2001-2003} \> Advanced Secondary Education - \href{http://www.berkeleycollege.edu}{Berkeley College, California}\\[5pt]
-\>\+
-\textit{Pure Mathematics} \> A \\
-\textit{Statistics (AS)} \> A \\
-\textit{Physics} \> A \\
-\textit{Economics} \> B
-}
 
 %----------------------------------------------------------------------------------------
 %	EMPLOYMENT HISTORY SECTION
@@ -83,15 +73,14 @@
 
 \section{Employment History}
 
-\foreach \title/\summary/\mon/\yea in \Dpositions {
+\foreach \title/\summary/\company/\mon/\yea in \Dpositions {
 	\job
 	{\mon-\yea - Present}
-	{Lehman Brothers, 1234 Mario Park, San Francisco, CA, United States}\newline
-	{www.lehmanbrothers.com}\newline
+	{\company}\newline
+	{www.\company.com}\newline
 	{\title} % Job title
 	{\summary}
 }
-
 
 
 %----------------------------------------------------------------------------------------

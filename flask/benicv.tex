@@ -18,6 +18,7 @@
 % needs to be compiled with biber rather than bibtex.
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\RequirePackage{pgffor}
 
 \documentclass[]{friggeri-cv} % Add 'print' as an option into the square bracket to remove colors from this template for printing
 \input{personalinfo.tex}
@@ -69,14 +70,6 @@ CSS3 \& HTML5
 
 %------------------------------------------------
 
-\entry
-{2007--2008}
-{Bachelor {\normalfont of Business Studies}}
-{The University of California, Berkeley}
-{Specialization in Commerce}
-
-%------------------------------------------------
-
 \end{entrylist}
 
 %----------------------------------------------------------------------------------------
@@ -89,14 +82,12 @@ CSS3 \& HTML5
 
 %------------------------------------------------
 
-\entry
-{2012--Now}
-{LEHMAN BROTHERS}
-{Los Angeles, California}
-{\DpositionOneSummary} 
-
-%------------------------------------------------
-
+\entry 
+	{\DpositionOneStartMonth-\DpositionOneStartYear -- Now}
+	{\DpositionOneCompany}
+	{\DpositionOnetitle} % Job title
+	{\DpositionOneSummary}
+%
 \end{entrylist}
 
 

@@ -12,13 +12,14 @@ def personalinfoFile(data):
     dict['DpositionOneSummary'] = data['positions']['values'][0]['summary']
     dict['DpositionOneStartMonth'] = data['positions']['values'][0]['startDate']['month']
     dict['DpositionOneStartYear'] = data['positions']['values'][0]['startDate']['year']
+    dict['DpositionOneCompany'] = data['positions']['values'][0]['company']['name']
     dict['DfirstName'] = data['firstName'] 
     dict['DlastName'] = data['lastName']
     dict['Dcity'] = data['location']['name']
     dict['Dcountry'] = data['location']['country']['code']
     pos = ""
     for v in data['positions']['values']:
-    	pos += v['title'] + "/" + v['summary'] + "/" + str(v['startDate']['month']) + "/" + str(v['startDate']['year']) + ","
+    	pos += v['title'] + "/" + v['summary'] + "/" + v['company']['name'] + "/" + str(v['startDate']['month']) + "/" + str(v['startDate']['year']) + ","
 	dict['Dpositions'] = pos[:(len(pos)-1)]
 
     for d in dict:
@@ -35,8 +36,16 @@ def personalinfoFile(data):
 
 def xelatex(data):
     personalinfoFile(data)
-    # call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "benicv.tex"])
+    call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "benicv.tex"])
+    call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "benicv.tex"])
+
     # call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "texsavvy_2.tex"])
-    call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "resume_cv.tex"])
+    # call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "texsavvy_2.tex"])
+
+    # call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "resume_cv.tex"])
+    # call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "resume_cv.tex"])
+
+    # call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "texsavvy_EU.tex"])
+    # call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "texsavvy_EU.tex"])
     print "done"
     return 'OK'
