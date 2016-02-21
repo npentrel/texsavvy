@@ -1,0 +1,21 @@
+.container {
+    width: 40%;
+}
+
+.textfield {
+    min-height: 42px;
+    resize: none;
+}
+
+.large {
+    min-height: 84px;
+    resize: none;
+}
+
+.work {
+    margin-bottom: 36px;
+}
+
+h5 {
+    margin-top: 24px;
+}

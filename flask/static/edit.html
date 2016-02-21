@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Texsavvy</title>
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+  <link rel="stylesheet" href="css/custom.css">
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+</head>
+<body>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="container">
+    <div style="margin-top: 10%">
+    <h5>Education</h5>
+      <div class="education">
+        <textarea class="u-full-width textfield" placeholder="University*" id="exampleMessage"></textarea>
+        <div class="row">
+          <div class="one-half column">
+            <textarea class="u-full-width textfield" placeholder="Begin Date" id="exampleMessage"></textarea>
+          </div>
+          <div class="one-half column">
+            <textarea class="u-full-width textfield" placeholder="Graduation Date" id="exampleMessage"></textarea>
+          </div>
+        </div>
+      </div>
+      
+      <h5>Work Experience</h5>
+      {% for job in jobs %}
+      <div class="work">
+        <textarea class="u-full-width textfield" placeholder="Title*" id="title">{{ job['title'] }}</textarea>
+        <textarea class="u-full-width textfield" placeholder="Workplace*" id="workplace">{{ job['company']['name'] }}</textarea>
+        <textarea class="u-full-width textfield large" placeholder="Summary" id="summary">{{ job['summary'] }}</textarea>
+        <div class="row">
+          <div class="one-half column">
+            <textarea class="u-full-width textfield" placeholder="Begin Date" id="job_begin_date">{{ '%02d' | format(job['startDate']['month'] )}}/{{ job['startDate']['year']}}</textarea>
+          </div>
+          <div class="one-half column">
+            <textarea class="u-full-width textfield" placeholder="End Date" id="job_end_date">{{ '%02d' | format((job['startDate']['month'] + 3) % 12 +1 )}}/{{ job['startDate']['year'] + 2}}</textarea>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+
+    </div>
+  </div>
+
+<!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+</html>
