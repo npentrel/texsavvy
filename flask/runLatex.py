@@ -37,7 +37,6 @@ def personalinfoFile(data):
         target.write("}\n")	
     target.close()
 
-
 def xelatex(data):
     personalinfoFile(data)
     call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "benicv.tex"])
