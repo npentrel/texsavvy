@@ -11,3 +11,4 @@ pip-selfcheck.json
 *.aux
 *.out
 flask/data.json
+ngrok
