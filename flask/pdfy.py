@@ -56,7 +56,7 @@ def processing(txt):
             i += 1
         if experienceFound == 10:
             experience = False
-        if txt[i] == 'Volunteer Experience':
+        if txt[i] == 'Volunteer Experience' or txt[i] == 'Education':
             experience = False
         if experience:
             fields['experience' + str(experienceFound + 1)]['title'] = txt[i]

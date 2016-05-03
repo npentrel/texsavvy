@@ -15,20 +15,8 @@ def personalinfoFile(data):
     urllib.urlretrieve(dict['DpictureUrl'], "image.jpg")
     
     dict['Dlinkedin'] = data['publicProfileUrl']
-    # dict['DpositionOnetitle'] = data['positions']['values'][0]['title']
-    # dict['DpositionOneSummary'] = data['positions']['values'][0]['summary']
-    # dict['DpositionOneStartMonth'] = data['positions']['values'][0]['startDate']['month']
-    # dict['DpositionOneStartYear'] = data['positions']['values'][0]['startDate']['year']
-    # dict['DpositionOneCompany'] = data['positions']['values'][0]['company']['name']
     dict['DfirstName'] = data['formattedName'].split()[0] 
     dict['DlastName'] = " ".join(data['formattedName'].split()[1:])
-    # dict['Dcity'] = data['location']['name']
-    # dict['Dcountry'] = countries.get(data['location']['country']['code'])[0]
-    dict['DpositionOnetitle'] = ""
-    dict['DpositionOneSummary'] = ""
-    dict['DpositionOneStartMonth'] = ""
-    dict['DpositionOneStartYear'] = ""
-    dict['DpositionOneCompany'] = ""
     dict['Dcity'] = "London"
     dict['Dcountry'] = "UK"
     dict['Dpositions'] = {}

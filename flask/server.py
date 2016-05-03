@@ -7,10 +7,15 @@ from template import render
 import json
 from utils import linkedin_format
 from collections import defaultdict
+import os
+from werkzeug import secure_filename
 
+UPLOAD_FOLDER = ''
+ALLOWED_EXTENSIONS = set(['pdf'])
 app = Flask(__name__, static_url_path='', template_folder='static')
 app.debug = True
 app.secret_key = 'development'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 oauth = OAuth(app)
 
 # current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -68,7 +73,8 @@ def cv():
 def edit():
     print session
     if 'linkedin_token' in session:
-        me = linkedin_data()
+        me = linkedin.get('people/~:(id,first-name,last-name,formatted-name,headline,email-address,picture-url,picture-urls::(original),public-profile-url,location,industry,summary,specialties,positions:(id,title,summary,start-date,end-date,is-current,company:(id,name,type,size,industry,ticker)),educations:(id,school-name,field-of-study,start-date,end-date,degree,activities,notes),associations,interests,num-recommenders,date-of-birth,publications:(id,title,publisher:(name),authors:(id,name),date,url,summary),patents:(id,title,summary,number,status:(id,name),office:(name),inventors:(id,name),date,url),languages:(id,language:(name),proficiency:(level,name)),skills:(id,skill:(name)),certifications:(id,name,authority:(name),number,start-date,end-date),courses:(id,name,number),recommendations-received:(id,recommendation-type,recommendation-text,recommender),honors-awards,three-current-positions,three-past-positions,volunteer)')
+    
         template = render_template('edit.html',
             jobs=me.data['positions']['values']
         )
@@ -110,6 +116,30 @@ def logout():
     session.pop('linkedin_token', None)
     return redirect(url_for('index'))
 
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
+
+@app.route('/upload', methods=['GET', 'POST'])
+def upload():
+    if request.method == 'POST':
+        file = request.files['file']
+        if file and allowed_file(file.filename):
+            filename = secure_filename("uploadedcv.pdf")
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+            return redirect(url_for('upload',
+                                    filename=filename))
+    return '''
+    <!doctype html>
+    <title>Upload new File</title>
+    <h1>Upload new File</h1>
+    <form action="" method=post enctype=multipart/form-data>
+      <p><input type=file name=file>
+         <input type=submit value=Upload >
+         <button><a href="latex"> Create CV </a> </button>
+    </form>
+    '''
+
 
 @app.route('/login/authorized')
 def authorized():
@@ -127,7 +157,8 @@ def get_linkedin_oauth_token():
     return session.get('linkedin_token')
 
 def linkedin_data():
-    data = pdfytxt(['pdfy.py', '../NaomiPentrel.pdf'])
+    data = pdfytxt(['pdfy.py', 'uploadedcv.pdf'])
+    print data
     dataLinkedIn = linkedin.get('people/~:(id,first-name,last-name,formatted-name,headline,email-address,picture-url,picture-urls::(original),public-profile-url,location,industry,summary,specialties,positions:(id,title,summary,start-date,end-date,is-current,company:(id,name,type,size,industry,ticker)),educations:(id,school-name,field-of-study,start-date,end-date,degree,activities,notes),associations,interests,num-recommenders,date-of-birth,publications:(id,title,publisher:(name),authors:(id,name),date,url,summary),patents:(id,title,summary,number,status:(id,name),office:(name),inventors:(id,name),date,url),languages:(id,language:(name),proficiency:(level,name)),skills:(id,skill:(name)),certifications:(id,name,authority:(name),number,start-date,end-date),courses:(id,name,number),recommendations-received:(id,recommendation-type,recommendation-text,recommender),honors-awards,three-current-positions,three-past-positions,volunteer)')
     data['pictureUrls'] = {}
     data['pictureUrls']['values'] = {}
