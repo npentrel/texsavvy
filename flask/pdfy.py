@@ -13,6 +13,7 @@ from pdfminer.cmapdb import CMapDB
 from pdfminer.layout import LAParams
 from pdfminer.image import ImageWriter
 from cStringIO import StringIO
+import string
 
 def processing(txt):
     txtraw = txt.splitlines()
@@ -20,9 +21,10 @@ def processing(txt):
     i = 0
     skip = False
     for line in txtraw:
-        if not skip:
+        if not skip:            
             if "Page" not in line:
-                txt[i] = line
+                line = string.replace(line, "\x0c", "")
+                txt[i] = string.replace(line, "\xe2\x82\xac", " Euro")
                 i += 1
             else:
                 skip = True
@@ -70,6 +72,7 @@ def processing(txt):
         else :
             i += 1
 
+    fields['experienceFound'] = experienceFound
     print fields
     return fields
 

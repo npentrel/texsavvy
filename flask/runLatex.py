@@ -3,6 +3,7 @@ from iso3166 import countries
 import urllib
 import os
 import shutil
+import string
 
 def personalinfoFile(data):
     target = open('personalinfo.tex', 'w')
@@ -28,12 +29,16 @@ def personalinfoFile(data):
     dict['DpositionOneStartMonth'] = ""
     dict['DpositionOneStartYear'] = ""
     dict['DpositionOneCompany'] = ""
-    dict['Dcity'] = ""
-    dict['Dcountry'] = ""
-    pos = ""
+    dict['Dcity'] = "London"
+    dict['Dcountry'] = "UK"
+    dict['Dpositions'] = {}
+    experiences = ""
+    for i in range(1, data['experienceFound']):
+        experiences += string.replace(data['experience' + str(i)]['title'].split("at")[0], ",", ";") + "/" + string.replace(data['experience' + str(i)]['body'], ",", ";")[:(len(string.replace(data['experience' + str(i)]['body'], ",", ";"))-1)] + "/" + string.replace(data['experience' + str(i)]['title'].split("at")[1], ",", ";") + "/" + str(5) + "/" + str(2013) + ","
+    dict['Dpositions'] = experiences[:(len(experiences)-1)]
+
     # for v in data['positions']['values']:
     # 	pos += v['title'] + "/" + v['summary'] + "/" + v['company']['name'] + "/" + str(v['startDate']['month']) + "/" + str(v['startDate']['year']) + ","
-    dict['Dpositions'] = {}
     # dict['Dpositions'] = pos[:(len(pos)-1)]
 
     for d in dict:
