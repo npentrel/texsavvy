@@ -14,19 +14,27 @@ def personalinfoFile(data):
     urllib.urlretrieve(dict['DpictureUrl'], "image.jpg")
     
     dict['Dlinkedin'] = data['publicProfileUrl']
-    dict['DpositionOnetitle'] = data['positions']['values'][0]['title']
-    dict['DpositionOneSummary'] = data['positions']['values'][0]['summary']
-    dict['DpositionOneStartMonth'] = data['positions']['values'][0]['startDate']['month']
-    dict['DpositionOneStartYear'] = data['positions']['values'][0]['startDate']['year']
-    dict['DpositionOneCompany'] = data['positions']['values'][0]['company']['name']
-    dict['DfirstName'] = data['firstName'] 
-    dict['DlastName'] = data['lastName']
-    dict['Dcity'] = data['location']['name']
-    dict['Dcountry'] = countries.get(data['location']['country']['code'])[0]
+    # dict['DpositionOnetitle'] = data['positions']['values'][0]['title']
+    # dict['DpositionOneSummary'] = data['positions']['values'][0]['summary']
+    # dict['DpositionOneStartMonth'] = data['positions']['values'][0]['startDate']['month']
+    # dict['DpositionOneStartYear'] = data['positions']['values'][0]['startDate']['year']
+    # dict['DpositionOneCompany'] = data['positions']['values'][0]['company']['name']
+    dict['DfirstName'] = data['formattedName'].split()[0] 
+    dict['DlastName'] = " ".join(data['formattedName'].split()[1:])
+    # dict['Dcity'] = data['location']['name']
+    # dict['Dcountry'] = countries.get(data['location']['country']['code'])[0]
+    dict['DpositionOnetitle'] = ""
+    dict['DpositionOneSummary'] = ""
+    dict['DpositionOneStartMonth'] = ""
+    dict['DpositionOneStartYear'] = ""
+    dict['DpositionOneCompany'] = ""
+    dict['Dcity'] = ""
+    dict['Dcountry'] = ""
     pos = ""
-    for v in data['positions']['values']:
-    	pos += v['title'] + "/" + v['summary'] + "/" + v['company']['name'] + "/" + str(v['startDate']['month']) + "/" + str(v['startDate']['year']) + ","
-	dict['Dpositions'] = pos[:(len(pos)-1)]
+    # for v in data['positions']['values']:
+    # 	pos += v['title'] + "/" + v['summary'] + "/" + v['company']['name'] + "/" + str(v['startDate']['month']) + "/" + str(v['startDate']['year']) + ","
+    dict['Dpositions'] = {}
+    # dict['Dpositions'] = pos[:(len(pos)-1)]
 
     for d in dict:
         target.write("\\newcommand{\\")
@@ -45,16 +53,16 @@ def xelatex(data):
     # call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "benicv.tex"])
     # shutil.copy("benicv.pdf", "static/resume.pdf")
 
-    call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "texsavvy_2.tex"])
-    call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "texsavvy_2.tex"])
-    shutil.copy("texsavvy_2.pdf", "static/resume.pdf")
+    # call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "texsavvy_2.tex"])
+    # call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "texsavvy_2.tex"])
+    # shutil.copy("texsavvy_2.pdf", "static/resume.pdf")
 
     # call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "resume_cv.tex"])
     # call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "resume_cv.tex"])
     # shutil.copy("resume_cv.pdf", "static/resume.pdf")
 
-    # call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "texsavvy_EU.tex"])
-    # call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "texsavvy_EU.tex"])    
-    # shutil.copy("texsavvy_EU.pdf", "static/resume.pdf")
+    call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "texsavvy_EU.tex"])
+    call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "texsavvy_EU.tex"])    
+    shutil.copy("texsavvy_EU.pdf", "static/resume.pdf")
     print "done"
     return 'OK'

@@ -2,6 +2,7 @@ from flask import Flask, redirect, url_for, session, request, jsonify, render_te
 from flask_oauthlib.client import OAuth
 from secrets import LINKEDIN_KEY, LINKEDIN_SECRET
 from runLatex import xelatex
+from pdfy import pdfytxt
 from template import render
 import json
 from utils import linkedin_format
@@ -46,11 +47,11 @@ def linkedin_info(form_data):
         me = linkedin_data()
 
         template = render_template('cv.html',
-            name=me.data['formattedName'],
-            tagline=me.data['headline'],
-            email=me.data['emailAddress'],
-            pictureUrl=me.data['pictureUrls']['values'][0],
-            linkedin=me.data['publicProfileUrl'],
+            name=me['formattedName'],
+            tagline=me['headline'],
+            email=me['emailAddress'],
+            pictureUrl=me['pictureUrls']['values'][0],
+            linkedin=me['publicProfileUrl'],
             form_data=form_data
         )
         return template
@@ -99,8 +100,8 @@ def login():
 @app.route('/latex')
 def latex():
     if 'linkedin_token' in session:
-        me = linkedin.get('people/~:(id,first-name,last-name,formatted-name,headline,email-address,picture-url,picture-urls::(original),public-profile-url,location,industry,summary,specialties,positions:(id,title,summary,start-date,end-date,is-current,company:(id,name,type,size,industry,ticker)),educations:(id,school-name,field-of-study,start-date,end-date,degree,activities,notes),associations,interests,num-recommenders,date-of-birth,publications:(id,title,publisher:(name),authors:(id,name),date,url,summary),patents:(id,title,summary,number,status:(id,name),office:(name),inventors:(id,name),date,url),languages:(id,language:(name),proficiency:(level,name)),skills:(id,skill:(name)),certifications:(id,name,authority:(name),number,start-date,end-date),courses:(id,name,number),recommendations-received:(id,recommendation-type,recommendation-text,recommender),honors-awards,three-current-positions,three-past-positions,volunteer)')
-        xelatex(me.data)
+        me = linkedin_data()
+        xelatex(me)
         return send_from_directory('static', 'resume.pdf')
     return redirect(url_for('login'))
 
@@ -126,7 +127,14 @@ def get_linkedin_oauth_token():
     return session.get('linkedin_token')
 
 def linkedin_data():
-    return linkedin.get('people/~:(id,first-name,last-name,formatted-name,headline,email-address,picture-url,picture-urls::(original),public-profile-url,location,industry,summary,specialties,positions:(id,title,summary,start-date,end-date,is-current,company:(id,name,type,size,industry,ticker)),educations:(id,school-name,field-of-study,start-date,end-date,degree,activities,notes),associations,interests,num-recommenders,date-of-birth,publications:(id,title,publisher:(name),authors:(id,name),date,url,summary),patents:(id,title,summary,number,status:(id,name),office:(name),inventors:(id,name),date,url),languages:(id,language:(name),proficiency:(level,name)),skills:(id,skill:(name)),certifications:(id,name,authority:(name),number,start-date,end-date),courses:(id,name,number),recommendations-received:(id,recommendation-type,recommendation-text,recommender),honors-awards,three-current-positions,three-past-positions,volunteer)')
+    data = pdfytxt(['pdfy.py', '../NaomiPentrel.pdf'])
+    dataLinkedIn = linkedin.get('people/~:(id,first-name,last-name,formatted-name,headline,email-address,picture-url,picture-urls::(original),public-profile-url,location,industry,summary,specialties,positions:(id,title,summary,start-date,end-date,is-current,company:(id,name,type,size,industry,ticker)),educations:(id,school-name,field-of-study,start-date,end-date,degree,activities,notes),associations,interests,num-recommenders,date-of-birth,publications:(id,title,publisher:(name),authors:(id,name),date,url,summary),patents:(id,title,summary,number,status:(id,name),office:(name),inventors:(id,name),date,url),languages:(id,language:(name),proficiency:(level,name)),skills:(id,skill:(name)),certifications:(id,name,authority:(name),number,start-date,end-date),courses:(id,name,number),recommendations-received:(id,recommendation-type,recommendation-text,recommender),honors-awards,three-current-positions,three-past-positions,volunteer)')
+    data['pictureUrls'] = {}
+    data['pictureUrls']['values'] = {}
+    data['pictureUrls']['values'][0] = dataLinkedIn.data['pictureUrls']['values'][0]
+    data['publicProfileUrl'] = dataLinkedIn.data['publicProfileUrl']
+    # print data
+    return data
 
 def change_linkedin_query(uri, headers, body):
     auth = headers.pop('Authorization')

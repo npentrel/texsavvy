@@ -12,9 +12,69 @@ from pdfminer.converter import XMLConverter, HTMLConverter, TextConverter
 from pdfminer.cmapdb import CMapDB
 from pdfminer.layout import LAParams
 from pdfminer.image import ImageWriter
+from cStringIO import StringIO
+
+def processing(txt):
+    txtraw = txt.splitlines()
+    txt = {}
+    i = 0
+    skip = False
+    for line in txtraw:
+        if not skip:
+            if "Page" not in line:
+                txt[i] = line
+                i += 1
+            else:
+                skip = True
+        else:
+            skip = False
+
+    # print txt
+    fields = {}
+    fields['formattedName'] = txt[0]
+    fields['headline'] = txt[1]
+    fields['emailAddress'] = txt[2]
+    fields['experience1'] = {}
+    fields['experience2'] = {}
+    fields['experience3'] = {}
+    fields['experience4'] = {}
+    fields['experience5'] = {}
+    fields['experience6'] = {}
+    fields['experience7'] = {}
+    fields['experience8'] = {}
+    fields['experience9'] = {}
+    fields['experience10'] = {}
+
+    experience = False
+    experienceFound = 0
+    i = 0
+    while i < len(txt):
+        if txt[i] == 'Experience':
+            experience = True
+            i += 1
+        if experienceFound == 10:
+            experience = False
+        if txt[i] == 'Volunteer Experience':
+            experience = False
+        if experience:
+            fields['experience' + str(experienceFound + 1)]['title'] = txt[i]
+            i += 1
+            fields['experience' + str(experienceFound + 1)]['time'] = txt[i]                
+            i += 2
+            fields['experience' + str(experienceFound + 1)]['body'] = ''
+            while txt[i] != '':                    
+                fields['experience' + str(experienceFound + 1)]['body'] = fields['experience' + str(experienceFound + 1)]['body'] + ' ' + txt[i]
+                i += 1
+            experienceFound += 1
+            i += 1
+        else :
+            i += 1
+
+    print fields
+    return fields
 
 # main
-def main(argv):
+def pdfytxt(argv):
     import getopt
     def usage():
         print ('usage: %s [-d] [-p pagenos] [-m maxpages] [-P password] [-o output]'
@@ -87,7 +147,7 @@ def main(argv):
     if outfile:
         outfp = file(outfile, 'w')
     else:
-        outfp = sys.stdout
+        outfp = StringIO()
     if outtype == 'text':
         device = TextConverter(rsrcmgr, outfp, codec=codec, laparams=laparams,
                                imagewriter=imagewriter)
@@ -109,10 +169,12 @@ def main(argv):
                                       maxpages=maxpages, password=password,
                                       caching=caching, check_extractable=True):
             page.rotate = (page.rotate+rotation) % 360
-            interpreter.process_page(page)
+            interpreter.process_page(page)            
         fp.close()
     device.close()
-    outfp.close()
-    return
+
+    text = outfp.getvalue()
+    data = processing(text)
+    return data
 
 if __name__ == '__main__': sys.exit(main(sys.argv))
