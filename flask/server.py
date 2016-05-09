@@ -131,13 +131,36 @@ def upload():
                                     filename=filename))
     return '''
     <!doctype html>
-    <title>Upload new File</title>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8">
+  <title>Texsavvy</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+  <link rel="stylesheet" href="css/custom.css">
+  <link rel="stylesheet" href="css/buttons.css">
+
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+</head>
+<body>
+    <title>Upload LinkedIn Resume</title>
     <h1>Upload new File</h1>
     <form action="" method=post enctype=multipart/form-data>
       <p><input type=file name=file>
-         <input type=submit value=Upload >
-         <button><a href="latex"> Create CV </a> </button>
+         <input type=submit value=Upload class="button" id="loginButton">
+         <a href="latex" class="button" id="loginButton"><i class="fa fa-download"></i> Generate CV</a>
     </form>
+    </body>
+</html>
+
     '''
 
 
