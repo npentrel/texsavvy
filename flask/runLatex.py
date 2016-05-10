@@ -46,6 +46,7 @@ def personalinfoFile(data):
         else:
         	target.write(str(dict[d]))
         target.write("}\n")	
+
     target.close()
 
 def xelatex(data):
