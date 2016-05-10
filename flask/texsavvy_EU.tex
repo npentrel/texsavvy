@@ -111,10 +111,16 @@
 %----------------------------------------------------------------------------------------
 
 \section{Languages}
+\iftoggle{lang} {
+    \foreach \title/\summary in \Dlanguages {
+        \cvitemwithcomment{\title}{\summary}{}
+    }
+}
+{\cvitemwithcomment{English}{Native or bilingual proficiency}{}}
 
-\cvitemwithcomment{German}{Native or bilingual proficiency}{}
-\cvitemwithcomment{English}{Full professional proficiency}{}
-\cvitemwithcomment{Spanish}{Elementary proficiency}{}
+% \cvitemwithcomment{German}{Native or bilingual proficiency}{}
+% \cvitemwithcomment{English}{Full professional proficiency}{}
+% \cvitemwithcomment{Spanish}{Elementary proficiency}{}
 %\cvitemwithcomment{Dutch}{Basic}{Basic words and phrases only}
 
 %----------------------------------------------------------------------------------------

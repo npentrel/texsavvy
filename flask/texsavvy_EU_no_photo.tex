@@ -111,8 +111,12 @@
 %----------------------------------------------------------------------------------------
 
 \section{Languages}
-
-\cvitemwithcomment{English}{(Native or bilingual proficiency}{}
+\iftoggle{lang} {
+    \foreach \title/\summary in \Dlanguages {
+        \cvitemwithcomment{\title}{\summary}{}
+    }
+}
+{\cvitemwithcomment{English}{Native or bilingual proficiency}{}}
 %\cvitemwithcomment{Spanish}{Intermediate}{Conversationally fluent}
 %\cvitemwithcomment{Dutch}{Basic}{Basic words and phrases only}
 

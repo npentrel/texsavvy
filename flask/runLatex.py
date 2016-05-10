@@ -37,6 +37,20 @@ def personalinfoFile(data):
     # 	pos += v['title'] + "/" + v['summary'] + "/" + v['company']['name'] + "/" + str(v['startDate']['month']) + "/" + str(v['startDate']['year']) + ","
     # dict['Dpositions'] = pos[:(len(pos)-1)]
 
+    target.write("\\providetoggle{lang}\n")
+    if (data['lang']):
+        target.write("\\settoggle{lang}{true}")
+        languages = ""
+        for i in range(1, data['languagesFound']+1):
+            languages += data['languages' + str(i)]['title'] + "/" + string.replace(data['languages' + str(i)]['body'], ",", ";") + ","
+        dict['Dlanguages'] = languages[:(len(languages)-1)]
+        print "!!!"
+        print languages
+
+    else : 
+        target.write("\\settoggle{lang}{false}")
+
+
     for d in dict:
         target.write("\\newcommand{\\")
         target.write(d)
@@ -64,13 +78,13 @@ def xelatex(data):
     # shutil.copy("resume_cv.pdf", "static/resume.pdf")
 
 
-    call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "texsavvy_EU_no_photo.tex"])
-    call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "texsavvy_EU_no_photo.tex"])    
-    shutil.copy("texsavvy_EU_no_photo.pdf", "static/resume.pdf")
+    # call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "texsavvy_EU_no_photo.tex"])
+    # call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "texsavvy_EU_no_photo.tex"])    
+    # shutil.copy("texsavvy_EU_no_photo.pdf", "static/resume.pdf")
 
 
-    # call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "texsavvy_EU.tex"])
-    # call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "texsavvy_EU.tex"])    
-    # shutil.copy("texsavvy_EU.pdf", "static/resume.pdf")
+    call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "texsavvy_EU.tex"])
+    call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "texsavvy_EU.tex"])    
+    shutil.copy("texsavvy_EU.pdf", "static/resume.pdf")
     print "done"
     return 'OK'

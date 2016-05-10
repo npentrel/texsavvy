@@ -50,11 +50,20 @@ def processing(txt):
     fields['experience10'] = {}
     fields['education1'] = {}
     fields['education2'] = {}
+    fields['languages1'] = {}
+    fields['languages2'] = {}
+    fields['languages3'] = {}
+    fields['languages4'] = {}
+    fields['languages5'] = {}
+    fields['languages6'] = {}
 
     experience = False
     experienceFound = 0
     education = False
     educationFound = 0
+    languages = False
+    languagesFound = 0
+
     i = 0
     while i < len(txt):
         if txt[i] == 'Experience':
@@ -106,6 +115,43 @@ def processing(txt):
             i += 1
 
     fields['educationFound'] = educationFound
+
+    i = 0
+    while i < len(txt):
+        if txt[i] == 'Languages':
+            languages = True
+            i += 1
+        if languagesFound == 3:
+            languages = False
+        if txt[i] == 'Projects' or txt[i] == 'Education':
+            languages = False
+        if languages:
+            while txt[i] != "":
+                fields['languages' + str(languagesFound + 1)]['title'] = txt[i]
+                i += 1
+                languagesFound += 1
+            i += 1
+            j = 1
+            while j <= languagesFound:
+                fields['languages' + str(j)]['body'] = txt[i][:-1][1:]
+                j += 1
+                i += 1
+            languages = False
+        else :
+            i += 1
+
+    fields['languagesFound'] = languagesFound
+    if languagesFound > 0: 
+        fields['lang'] = True
+        print fields['languages1']
+        print fields['languages2']
+        print fields['languages3']
+
+    else:
+        fields['lang'] = False
+
+
+
     # print fields
     return fields
 

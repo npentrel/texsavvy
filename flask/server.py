@@ -188,6 +188,11 @@ def linkedin_data():
     data['pictureUrls']['values'] = {}
     data['pictureUrls']['values'][0] = dataLinkedIn.data['pictureUrls']['values'][0]
     data['publicProfileUrl'] = dataLinkedIn.data['publicProfileUrl']
+
+    # data['pictureUrls'] = {}
+    # data['pictureUrls']['values'] = {}
+    # data['pictureUrls']['values'][0] = ""
+    # data['publicProfileUrl'] = ""
     # print data
     return data
 
