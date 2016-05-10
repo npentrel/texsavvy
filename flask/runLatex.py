@@ -21,9 +21,17 @@ def personalinfoFile(data):
     dict['Dcountry'] = "UK"
     dict['Dpositions'] = {}
     experiences = ""
-    for i in range(1, data['experienceFound']):
-        experiences += string.replace(data['experience' + str(i)]['title'].split("at")[0], ",", ";") + "/" + string.replace(data['experience' + str(i)]['body'], ",", ";")[:(len(string.replace(data['experience' + str(i)]['body'], ",", ";"))-1)] + "/" + string.replace(data['experience' + str(i)]['title'].split("at")[1], ",", ";") + "/" + str(5) + "/" + str(2013) + ","
+    for i in range(1, data['experienceFound']+1):
+        experiences += string.replace(data['experience' + str(i)]['title'].split("at")[0], ",", ";") + "/" + string.replace(data['experience' + str(i)]['body'], ",", ";")[:(len(string.replace(data['experience' + str(i)]['body'], ",", ";"))-1)] + "/" + string.replace(data['experience' + str(i)]['title'].split("at")[1], ",", ";") + "/" + data['experience' + str(i)]['time1'] + "/" + "" + ","
     dict['Dpositions'] = experiences[:(len(experiences)-1)]
+    dict['Deducation'] = {}
+
+    education = ""
+    for i in range(1, data['educationFound']+1):
+        education += data['education' + str(i)]['title'] + "/" + string.replace(data['education' + str(i)]['body'], ",", ";") + "/" + data['education' + str(i)]['time1'] + "/" + data['education' + str(i)]['time2'] + ","
+    dict['Deducation'] = education[:(len(education)-1)]
+    print "!!!"
+    print education
 
     # for v in data['positions']['values']:
     # 	pos += v['title'] + "/" + v['summary'] + "/" + v['company']['name'] + "/" + str(v['startDate']['month']) + "/" + str(v['startDate']['year']) + ","
@@ -54,8 +62,14 @@ def xelatex(data):
     # call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "resume_cv.tex"])
     # shutil.copy("resume_cv.pdf", "static/resume.pdf")
 
-    call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "texsavvy_EU.tex"])
-    call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "texsavvy_EU.tex"])    
-    shutil.copy("texsavvy_EU.pdf", "static/resume.pdf")
+
+    call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "texsavvy_EU_no_photo.tex"])
+    call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "texsavvy_EU_no_photo.tex"])    
+    shutil.copy("texsavvy_EU_no_photo.pdf", "static/resume.pdf")
+
+
+    # call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "texsavvy_EU.tex"])
+    # call(["/usr/local/texlive/2015/bin/universal-darwin/xelatex", "texsavvy_EU.tex"])    
+    # shutil.copy("texsavvy_EU.pdf", "static/resume.pdf")
     print "done"
     return 'OK'

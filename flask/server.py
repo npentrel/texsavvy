@@ -151,13 +151,14 @@ def upload():
 
 </head>
 <body>
-    <title>Upload LinkedIn Resume</title>
-    <h1>Upload new File</h1>
-    <form action="" method=post enctype=multipart/form-data>
-      <p><input type=file name=file>
-         <input type=submit value=Upload class="button" id="loginButton">
-         <a href="latex" class="button" id="loginButton"><i class="fa fa-download"></i> Generate CV</a>
-    </form>
+        <h1 id="cent"> Upload LinkedIn Resume</h1>
+    <div id="cent">
+        <form action="" method=post enctype=multipart/form-data>
+          <p><input type=file name=file >
+             <input type=submit value=Upload class="button-primary" id="loginButton">
+             <a href="latex" class="button" id="loginButton"><i class="fa fa-download"></i> Generate CV</a>
+        </form>
+    </div>
     </body>
 </html>
 

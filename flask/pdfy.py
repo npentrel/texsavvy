@@ -14,6 +14,7 @@ from pdfminer.layout import LAParams
 from pdfminer.image import ImageWriter
 from cStringIO import StringIO
 import string
+import re
 
 def processing(txt):
     txtraw = txt.splitlines()
@@ -24,6 +25,7 @@ def processing(txt):
         if not skip:            
             if "Page" not in line:
                 line = string.replace(line, "\x0c", "")
+                line = string.replace(line, "&", "\&")
                 txt[i] = string.replace(line, "\xe2\x82\xac", " Euro")
                 i += 1
             else:
@@ -46,22 +48,28 @@ def processing(txt):
     fields['experience8'] = {}
     fields['experience9'] = {}
     fields['experience10'] = {}
+    fields['education1'] = {}
+    fields['education2'] = {}
 
     experience = False
     experienceFound = 0
+    education = False
+    educationFound = 0
     i = 0
     while i < len(txt):
         if txt[i] == 'Experience':
             experience = True
             i += 1
-        if experienceFound == 10:
+        if experienceFound == 3:
             experience = False
         if txt[i] == 'Volunteer Experience' or txt[i] == 'Education':
             experience = False
         if experience:
             fields['experience' + str(experienceFound + 1)]['title'] = txt[i]
             i += 1
-            fields['experience' + str(experienceFound + 1)]['time'] = txt[i]                
+            m = re.search('[^(]*', txt[i])
+            fields['experience' + str(experienceFound + 1)]['time1'] = m.group(0) 
+            fields['experience' + str(experienceFound + 1)]['time2'] = re.search('-.*', m.group(0)).group(0)[1:]  
             i += 2
             fields['experience' + str(experienceFound + 1)]['body'] = ''
             while txt[i] != '':                    
@@ -73,7 +81,32 @@ def processing(txt):
             i += 1
 
     fields['experienceFound'] = experienceFound
-    print fields
+    i = 0
+    while i < len(txt):
+        if txt[i] == 'Education':
+            education = True
+            i += 1
+        if educationFound == 2:
+            education = False
+        if txt[i] == 'Interests' or txt[i] == 'Education':
+            education = False
+        if education:
+            fields['education' + str(educationFound + 1)]['title'] = txt[i]
+            i += 1
+            fields['education' + str(educationFound + 1)]['body'] = ''
+            # while txt[i] != '':                    
+            fields['education' + str(educationFound + 1)]['body'] = fields['education' + str(educationFound + 1)]['body'] + ' ' + re.search('[^\d]+', txt[i]).group(0)[:-2]
+            m = re.search('(\\d)+', txt[i])
+            fields['education' + str(educationFound + 1)]['time1'] = m.group(0) 
+            fields['education' + str(educationFound + 1)]['time2'] = re.search('-.*', txt[i]).group(0)[1:]  
+            i += 1
+            educationFound += 1
+            # i += 1
+        else :
+            i += 1
+
+    fields['educationFound'] = educationFound
+    # print fields
     return fields
 
 # main
