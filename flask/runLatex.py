@@ -37,6 +37,13 @@ def personalinfoFile(data):
     # 	pos += v['title'] + "/" + v['summary'] + "/" + v['company']['name'] + "/" + str(v['startDate']['month']) + "/" + str(v['startDate']['year']) + ","
     # dict['Dpositions'] = pos[:(len(pos)-1)]
 
+    target.write("\\providetoggle{pic}\n")
+    if (dict['DfullName'] != 'Naomi Pentrel' and dict['DfullName'] != 'Jenny Brown'):
+        target.write("\\settoggle{pic}{false}\n")
+    else: 
+        target.write("\\settoggle{pic}{true}\n")
+    print "????????????"
+    print (dict['DfullName'] != 'Naomi Pentrel' and dict['DfullName'] != 'Jenny Brown')
     target.write("\\providetoggle{lang}\n")
     if (data['lang']):
         target.write("\\settoggle{lang}{true}")
